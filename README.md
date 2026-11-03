@@ -1,28 +1,33 @@
 # Состав — кабинет участника группы
 
-Фронтенд на TypeScript для регистрации и входа участников, а также просмотра и редактирования профиля.
+## Открыть сайт
 
-## Локальный запуск
+**[Перейти в кабинет участника](https://tazhibaev890-max.github.io/musick-group-/)**
+
+Сайт сразу откроется в браузере. Для регистрации и входа используется API музыкальной группы.
+
+## Запуск проекта на компьютере
+
+Требуется Node.js 22 или новее.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Публикационная сборка: `npm run build` (готовый сайт появится в `dist/`).
+Vite покажет локальный адрес, обычно `http://localhost:5173/`. Чтобы собрать опубликованную версию:
 
-## Авторизация и API
+```bash
+npm run build
+```
 
-Используется JWT API `https://inai-col3.fishrungames.com`:
+## Возможности
 
-- `POST /api/register/` и `POST /api/login/` выдают access-токен; refresh-токен хранится backend в HttpOnly cookie.
-- `POST /api/token/refresh/` обновляет access-токен.
-- `POST /api/logout/` завершает сессию.
-- `GET /api/profile/` и `PATCH /api/profile/` читают и обновляют профиль.
-- `GET /api/specializations/` загружает список специализаций.
+- Регистрация и вход по имени пользователя и паролю.
+- JWT-аутентификация с автоматическим обновлением access-токена.
+- Просмотр и редактирование профиля участника.
+- Выход из аккаунта.
 
-Access-токен хранится только в памяти вкладки. Запросы передают cookie через `credentials: include`.
+## Публикация
 
-## GitHub Pages
-
-Workflow `.github/workflows/deploy.yml` собирает сайт при push в ветку `main` и публикует `dist/` через GitHub Pages. В настройках репозитория выберите **Settings → Pages → Build and deployment → Source: GitHub Actions**. В `vite.config.ts` используется относительный base path, поэтому сайт работает и в Pages-проекте вида `username.github.io/repository/`.
+GitHub Actions автоматически собирает и публикует сайт на GitHub Pages после push в ветку `main`. Workflow находится в `.github/workflows/deploy.yml`.
